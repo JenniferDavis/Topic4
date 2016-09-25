@@ -27,38 +27,20 @@ public class Tax {
 	public final static int MARRIED_SEPATATELY = 2;
 	public final static int HEAD_OF_HOUSEHOLD = 3;
 	public static double taxableIncome;
-	public static double[] rates; // used
-	public static int[][] brackets; // used
-
+	public static double[] rates2009 = new double[6];
+	public static double[] rates2001 = new double[5];
+	public static int[][] brackets2009 = new int[4][5]; 
+	public static int[][] brackets2001 = new int[4][4];
 	
 	
 	public static void tax()  // no arg constructor
 	{
 		return;
 	}
-	
-	
-	
-	public static void getTax(int bracket, double taxableIncome)
-	{
-		//Suppose the taxable income is $400,000 for single filers. The tax can be computed as follows:
-		double tax = brackets[bracket][0] * rates[0] +
-		(brackets[bracket][1] - brackets[bracket][0]) * rates[1] +
-		(brackets[bracket][2] - brackets[bracket][1]) * rates[2] +
-		(brackets[bracket][3] - brackets[bracket][2]) * rates[3] +
-		(brackets[bracket][4] - brackets[bracket][3]) * rates[4] +
-		(taxableIncome - brackets[bracket][4]) * rates[5];
-		
-		System.out.println(tax);
-	}
-	
+
 	public static void tax(int filingStatus, int brackets, double rates, double taxableIncome)
 	{
-		if (filingStatus == 0)
-		{
-			getTax(0, taxableIncome);
-		}
-		
+	
 	}
 	
 	public static void setTax()
@@ -66,5 +48,190 @@ public class Tax {
 		
 	}
 	
-	
+	public static void getTax()
+	{
+		System.out.println("Filing Statuses:\nSingle Filers (Single)\nMarried filing jointly or qualifying widow(er) (MarJ-QWid)\nMarried filing separately (Mar-Sep)\nHead of Household (Head)");
+		System.out.println();
+		System.out.println("Based on the 2009 Tax Table");
+		System.out.println("Income\t\tSingle\t\tMarJ-QWid\tMar-Sep\t\tHead");
+		for (taxableIncome = 50000; taxableIncome <= 60000; taxableIncome = taxableIncome+1000)
+		{
+			double taxSingle2009 = brackets2009[0][0] * rates2009[0];
+				if(taxableIncome > brackets2009[0][0])
+				{
+					taxSingle2009+= (brackets2009[0][1] - brackets2009[0][0]) * rates2009[1];
+				}
+				if(taxableIncome > brackets2009[0][1])
+				{
+					taxSingle2009+= (brackets2009[0][2] - brackets2009[0][1]) * rates2009[2];
+				}
+				if(taxableIncome > brackets2009[0][2])
+				{
+					taxSingle2009+= (brackets2009[0][3] - brackets2009[0][2]) * rates2009[3];	
+				}
+				if(taxableIncome > brackets2009[0][3])
+				{
+					taxSingle2009+= (brackets2009[0][4] - brackets2009[0][3]) * rates2009[4];
+				}
+				if(taxableIncome > brackets2009[0][4])
+				{
+					taxSingle2009+= (taxableIncome - brackets2009[0][4]) * rates2009[5];
+				}
+			double taxMJW2009 = brackets2009[1][0] * rates2009[0];
+				if(taxableIncome > brackets2009[1][0])
+				{
+					taxMJW2009+= (brackets2009[1][1] - brackets2009[1][0]) * rates2009[1];
+				}
+				if(taxableIncome > brackets2009[1][1])
+				{
+					taxMJW2009+= (brackets2009[1][2] - brackets2009[1][1]) * rates2009[2];
+				}
+				if(taxableIncome > brackets2009[1][2])
+				{
+					taxMJW2009+= (brackets2009[1][3] - brackets2009[1][2]) * rates2009[3];
+				}
+				if(taxableIncome > brackets2009[1][3])
+				{
+					taxMJW2009+= (brackets2009[1][4] - brackets2009[1][3]) * rates2009[4];
+				}
+				if(taxableIncome > brackets2009[1][4])
+				{
+					taxMJW2009+= (taxableIncome - brackets2009[1][4]) * rates2009[5];
+				}
+			double taxMS2009 = brackets2009[2][0] * rates2009[0];
+				if(taxableIncome > brackets2009[2][0])
+				{
+					taxMS2009+= (brackets2009[2][1] - brackets2009[2][0]) * rates2009[1];
+				}
+				if(taxableIncome > brackets2009[2][1])
+				{
+					taxMS2009+= (brackets2009[2][2] - brackets2009[2][1]) * rates2009[2];
+				}
+				if(taxableIncome > brackets2009[2][2])
+				{
+					taxMS2009+= (brackets2009[2][3] - brackets2009[2][2]) * rates2009[3];
+				}
+				if(taxableIncome > brackets2009[2][3])
+				{
+					taxMS2009+= (brackets2009[2][4] - brackets2009[2][3]) * rates2009[4];
+				}
+				if(taxableIncome > brackets2009[2][4])
+				{
+					taxMS2009+= (taxableIncome - brackets2009[2][4]) * rates2009[5];
+				}
+			double taxHH2009 = brackets2009[1][0] * rates2009[0]; 
+				if(taxableIncome > brackets2009[1][0])
+				{
+					taxHH2009+= (brackets2009[3][1] - brackets2009[3][0]) * rates2009[1];
+				}
+				if(taxableIncome > brackets2009[3][1])
+				{
+					taxHH2009+= (brackets2009[3][2] - brackets2009[3][1]) * rates2009[2];
+				}
+				if(taxableIncome > brackets2009[3][2])
+				{
+					taxHH2009+= (brackets2009[3][3] - brackets2009[3][2]) * rates2009[3];
+				}
+				if (taxableIncome > brackets2009[3][3])
+				{
+					taxHH2009+= (brackets2009[3][4] - brackets2009[3][3]) * rates2009[4];
+				}
+				if(taxableIncome > brackets2009[3][4])
+				{
+					taxHH2009+= (taxableIncome - brackets2009[3][4]) * rates2009[5];
+				}
+			System.out.println(taxableIncome + "\t\t" + taxSingle2009 + "\t\t" + taxMJW2009 + "\t\t" + taxMS2009 + "\t\t" + taxHH2009);
+		}
+		System.out.println();
+		System.out.println("Based on the 2001 Tax Table");
+		System.out.println("Income\t\tSingle\t\tMarJ-QWid\tMar-Sep\t\tHead");
+		for (taxableIncome = 50000; taxableIncome <= 60000; taxableIncome = taxableIncome+1000)
+		{
+			double taxSingle2001 = brackets2001[0][0] * rates2001[0];
+				if(taxableIncome > brackets2001[0][0])
+				{
+					taxSingle2001+= (brackets2001[0][1] - brackets2001[0][0]) * rates2001[1];
+				}
+				if(taxableIncome > brackets2001[0][1])
+				{
+					taxSingle2001+= (brackets2001[0][2] - brackets2001[0][1]) * rates2001[2];
+				}
+				if(taxableIncome > brackets2001[0][2])
+				{
+					taxSingle2001+= (brackets2001[0][3] - brackets2001[0][2]) * rates2001[3];	
+				}
+				if(taxableIncome > brackets2001[0][3])
+				{
+					taxSingle2001+= (brackets2001[0][4] - brackets2001[0][3]) * rates2001[4];
+				}
+				//if(taxableIncome > brackets2001[0][4])
+				//{
+				//	taxSingle2001+= (taxableIncome - brackets2001[0][4]) * rates2001[5];
+				//}
+			double taxMJW2001 = brackets2001[1][0] * rates2001[0];
+				if(taxableIncome > brackets2001[1][0])
+				{
+					taxMJW2001+= (brackets2001[1][1] - brackets2001[1][0]) * rates2001[1];
+				}
+				if(taxableIncome > brackets2001[1][1])
+				{
+					taxMJW2001+= (brackets2001[1][2] - brackets2001[1][1]) * rates2001[2];
+				}
+				if(taxableIncome > brackets2001[1][2])
+				{
+					taxMJW2001+= (brackets2001[1][3] - brackets2001[1][2]) * rates2001[3];
+				}
+				if(taxableIncome > brackets2001[1][3])
+				{
+					taxMJW2001+= (brackets2001[1][4] - brackets2001[1][3]) * rates2001[4];
+				}
+				//if(taxableIncome > brackets2001[1][4])
+				//{
+				//	taxMJW2001+= (taxableIncome - brackets2001[1][4]) * rates2001[5];
+				//}
+			double taxMS2001 = brackets2001[2][0] * rates2001[0];
+				if(taxableIncome > brackets2001[2][0])
+				{
+					taxMS2001+= (brackets2001[2][1] - brackets2001[2][0]) * rates2001[1];
+				}
+				if(taxableIncome > brackets2001[2][1])
+				{
+					taxMS2001+= (brackets2001[2][2] - brackets2001[2][1]) * rates2001[2];
+				}
+				if(taxableIncome > brackets2001[2][2])
+				{
+					taxMS2001+= (brackets2001[2][3] - brackets2001[2][2]) * rates2001[3];
+				}
+				if(taxableIncome > brackets2001[2][3])
+				{
+					taxMS2001+= (brackets2001[2][4] - brackets2001[2][3]) * rates2001[4];
+				}
+				//if(taxableIncome > brackets2001[2][4])
+				//{
+				//	taxMS2001+= (taxableIncome - brackets2001[2][4]) * rates2001[5];
+				//}
+			double taxHH2001 = brackets2001[1][0] * rates2001[0]; 
+				if(taxableIncome > brackets2001[1][0])
+				{
+					taxHH2001+= (brackets2001[3][1] - brackets2001[3][0]) * rates2001[1];
+				}
+				if(taxableIncome > brackets2001[3][1])
+				{
+					taxHH2001+= (brackets2001[3][2] - brackets2001[3][1]) * rates2001[2];
+				}
+				if(taxableIncome > brackets2001[3][2])
+				{
+					taxHH2001+= (brackets2001[3][3] - brackets2001[3][2]) * rates2001[3];
+				}
+				if (taxableIncome > brackets2001[3][3])
+				{
+					taxHH2001+= (brackets2001[3][4] - brackets2001[3][3]) * rates2001[4];
+				}
+				//if(taxableIncome > brackets2001[3][4])
+				//{
+				//taxHH2001+= (taxableIncome - brackets2001[3][4]) * rates2001[5];
+				//}
+			System.out.println(taxableIncome + "\t\t" + taxSingle2001 + "\t\t" + taxMJW2001 + "\t\t" + taxMS2001 + "\t\t" + taxHH2001);
+		}
+	}	
 }
